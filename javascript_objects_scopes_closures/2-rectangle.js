@@ -1,7 +1,7 @@
 #!/usr/bin/node
 
 class Rectangle {
-    constructor(w, h) {
+    constructor (w, h) {
       if (w > 0 && h > 0) {
         this.width = w;
         this.height = h;
@@ -10,11 +10,6 @@ class Rectangle {
         this.width = undefined;
         this.height = undefined;
       }
-    }
-  
-    // Add a toString method to format the output
-    toString() {
-      return `Rectangle { width: ${this.width}, height: ${this.height} }`;
     }
   }
   
