@@ -2,13 +2,13 @@
 
 class Rectangle {
     constructor (w, h) {
-      if (w > 0 && h > 0) {
+      if (w <= 0 || h <= 0) {
+        // If width or height is not a positive integer, create an empty object
+        return {};
+      } else {
+        // Initialize the instance attributes width and height
         this.width = w;
         this.height = h;
-      } else {
-        // Create an empty object if width or height is not a positive integer
-        this.width = undefined;
-        this.height = undefined;
       }
     }
   }
