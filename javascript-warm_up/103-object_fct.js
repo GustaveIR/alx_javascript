@@ -10,9 +10,9 @@ const myObject = {
   
   console.log('{', 'type:', "'object',", 'value:', myObject.value + ' }');
   myObject.incr();
-  console.log('{', 'type:', "'object',", 'value:', myObject.value + ',', 'incr:', '[Function: incr]', ' }');
+  console.log('{', 'type:', "'object',", 'value:', myObject.value + ',', 'incr:', '[Function]' + ' }');
   myObject.incr();
-  console.log('{', 'type:', "'object',", 'value:', myObject.value + ',', 'incr:', '[Function: incr]', ' }');
+  console.log('{', 'type:', "'object',", 'value:', myObject.value + ',', 'incr:', '[Function]' + ' }');
   myObject.incr();
-  console.log('{', 'type:', "'object',", 'value:', myObject.value + ',', 'incr:', '[Function: incr]', ' }');
+  console.log('{', 'type:', "'object',", 'value:', myObject.value + ',', 'incr:', '[Function]' + ' }');
   
