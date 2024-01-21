@@ -31,10 +31,8 @@ class Rectangle {
   const r2 = new Rectangle(3, -3);
   console.log(r2.toString());
   
-  const r1 = new Rectangle(3, 3);
-console.log(r1.toString());
-console.log(r1.width);
-console.log(r1.height);
+  const r3 = new Rectangle(3);
+  console.log(r3.toString());
   
   const r4 = new Rectangle(undefined, 3);
   console.log(r4.toString());
