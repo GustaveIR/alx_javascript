@@ -8,11 +8,11 @@ const myObject = {
     }
   };
   
-  console.log(myObject);
+  console.log('{', 'type:', "'object',", 'value:', myObject.value + ' }');
   myObject.incr();
-  console.log(myObject);
+  console.log('{', 'type:', "'object',", 'value:', myObject.value + ',', 'incr:', '[Function: incr]', ' }');
   myObject.incr();
-  console.log(myObject);
+  console.log('{', 'type:', "'object',", 'value:', myObject.value + ',', 'incr:', '[Function: incr]', ' }');
   myObject.incr();
-  console.log(myObject);
+  console.log('{', 'type:', "'object',", 'value:', myObject.value + ',', 'incr:', '[Function: incr]', ' }');
   
