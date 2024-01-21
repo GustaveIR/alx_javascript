@@ -14,7 +14,11 @@ class Rectangle {
   
     // Custom toString method
     toString() {
-      return `Rectangle { width: ${this.width}, height: ${this.height} }`;
+      if (this.width !== undefined && this.height !== undefined) {
+        return `Rectangle { width: ${this.width}, height: ${this.height} }`;
+      } else {
+        return 'Rectangle {}';
+      }
     }
   }
   
