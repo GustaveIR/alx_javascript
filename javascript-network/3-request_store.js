@@ -2,6 +2,10 @@ const request = require('request');
 const fs = require('fs');
 const http = require('http');
 
+function getRandomPort() {
+  return Math.floor(Math.random() * (65535 - 49152 + 1)) + 49152;
+}
+
 const server = http.createServer((req, res) => {
   if (req.url === '/route_0') {
     // Fetch content from the specified URL for small text
@@ -27,7 +31,7 @@ const server = http.createServer((req, res) => {
   }
 });
 
-const PORT = 5051;
+const PORT = getRandomPort();
 
 server.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
