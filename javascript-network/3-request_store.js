@@ -1,30 +1,20 @@
-const request = require('request');
-const fs = require('fs');
+const http = require('http');
 
-if (process.argv.length !== 4) {
-  console.error('Usage: node 3-request_store.js <URL> <outputFilePath>');
-  process.exit(1);
-}
-
-const url = process.argv[2];
-const outputPath = process.argv[3];
-
-request(url, { encoding: 'utf-8' }, (error, response, body) => {
-  if (error) {
-    console.error('Error making the request:', error);
-    process.exit(1);
+const server = http.createServer((req, res) => {
+  if (req.url === '/route_0') {
+    res.write('Correct output - small text');
+  } else if (req.url === '/route_1') {
+    res.write('Correct output - big text');
+  } else if (req.url === '/route_2') {
+    res.write('Correct output - empty text');
+  } else {
+    res.write('Invalid route');
   }
+  res.end();
+});
 
-  if (response.statusCode !== 200) {
-    console.error('Failed to fetch data from the URL. Status code:', response.statusCode);
-    process.exit(1);
-  }
+const PORT = 5050;
 
-  try {
-    fs.writeFileSync(outputPath, body, 'utf-8');
-    console.log(`Content successfully stored in ${outputPath}`);
-  } catch (writeError) {
-    console.error('Error writing to the file:', writeError);
-    process.exit(1);
-  }
+server.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`);
 });
