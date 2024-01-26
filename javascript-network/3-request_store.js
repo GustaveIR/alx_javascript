@@ -1,4 +1,4 @@
-const request = require('request');
+const axios = require('axios');
 const fs = require('fs');
 
 // Check if enough arguments are provided
@@ -14,32 +14,17 @@ const filePath = process.argv[process.argv.length - 1];
 const urls = process.argv.slice(2, -1);
 
 // Function to handle request and file writing for each URL
-const processURL = (url) => {
-  request({
-    url: url,
-    encoding: 'utf-8',
-    followRedirect: true
-  }, (error, response, body) => {
-    if (error) {
-      console.error(`Error making the request for ${url}:`, error);
-      return;
-    }
-
-    if (response.statusCode !== 200) {
-      console.error(`Failed to fetch data from ${url}. Status code:`, response.statusCode);
-      return;
-    }
+const processURL = async (url) => {
+  try {
+    const response = await axios.get(url, { responseType: 'text' });
 
     // Write the body content to the specified file
-    fs.writeFile(filePath, body, 'utf-8', (err) => {
-      if (err) {
-        console.error(`Error writing to the file for ${url}:`, err);
-        return;
-      }
+    fs.writeFileSync(filePath, response.data, 'utf-8');
 
-      console.log(`Content successfully written to ${filePath} for ${url}`);
-    });
-  });
+    console.log(`Content successfully written to ${filePath} for ${url}`);
+  } catch (error) {
+    console.error(`Error making the request for ${url}:`, error.message);
+  }
 };
 
 // Process each URL
