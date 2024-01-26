@@ -9,7 +9,11 @@ if (process.argv.length !== 4) {
 const url = process.argv[2];
 const filePath = process.argv[3];
 
-request(url, { encoding: 'utf-8' }, (error, response, body) => {
+request({
+  url: url,
+  encoding: 'utf-8',
+  followRedirect: true // Follow redirects
+}, (error, response, body) => {
   if (error) {
     console.error('Error making the request:', error);
     process.exit(1);
