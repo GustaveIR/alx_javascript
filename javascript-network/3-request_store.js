@@ -1,25 +1,27 @@
 const axios = require('axios');
 const fs = require('fs');
 
-if (process.argv.length !== 4) {
-  console.error('Usage: node 3-request_store.js <URL> <FilePath>');
-  process.exit(1);
-}
+const baseURL = 'http://localhost:5050/';
 
-const url = process.argv[2];
-const filePath = process.argv[3];
+const routes = ['route_0', 'route_1', 'route_2'];
 
-const fetchDataAndStoreToFile = async () => {
+const fetchDataAndStoreToFile = async (route) => {
   try {
+    const url = baseURL + route;
     const response = await axios.get(url, { responseType: 'text' });
 
-    // Write the body content to the specified file
-    fs.writeFileSync(filePath, response.data, 'utf-8');
+    const filePath = `file_${routes.indexOf(route)}.txt`;
 
-    console.log(`Content successfully written to ${filePath}`);
+    // Append the body content to the specified file
+    fs.appendFileSync(filePath, response.data + '\n', 'utf-8');
+
+    console.log(`Content successfully written to ${filePath} for ${url}`);
   } catch (error) {
-    console.error(`Error making the request:`, error.message);
+    console.error(`Error making the request for ${route}:`, error.message);
   }
 };
 
-fetchDataAndStoreToFile();
+// Process each route
+routes.forEach((route) => {
+  fetchDataAndStoreToFile(route);
+});
