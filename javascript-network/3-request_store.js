@@ -1,18 +1,13 @@
 const axios = require('axios');
 const fs = require('fs');
 
-if (process.argv.length !== 3) {
-  console.error('Usage: node 3-request_store.js <FilePath>');
+if (process.argv.length !== 4) {
+  console.error('Usage: node 3-request_store.js <URL> <FilePath>');
   process.exit(1);
 }
 
-const filePath = process.argv[2];
-
-const urls = [
-  'http://localhost:5050/route_0',
-  'http://localhost:5050/route_1',
-  'http://localhost:5050/route_2',
-];
+const url = process.argv[2];
+const filePath = process.argv[3];
 
 const processURL = async (url) => {
   try {
@@ -24,7 +19,5 @@ const processURL = async (url) => {
   }
 };
 
-// Process each URL
-urls.forEach((url) => {
-  processURL(url);
-});
+// Process the specified URL
+processURL(url);
