@@ -1,5 +1,6 @@
-const axios = require('axios');
-const fs = require('fs').promises;
+// Use var or let instead of const for Node.js versions before 12.x
+var axios = require('axios');
+var fs = require('fs').promises;
 
 async function processURL(url) {
   try {
@@ -7,7 +8,7 @@ async function processURL(url) {
     return response.data;
   } catch (error) {
     console.error(`Error fetching content from ${url}: ${error.message}`);
-    return ''; // Return an empty string in case of an error
+    return '';
   }
 }
 
