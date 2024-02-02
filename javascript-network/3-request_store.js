@@ -1,36 +1,33 @@
-// 3-request_store.js
-
-// Import the axios library
 const axios = require('axios');
-const fs = require('fs/promises');
+const fs = require('fs').promises;
 
-// Function to process the URL and store the response in a file
-async function processURL(url, filePath) {
+async function processURL(url) {
   try {
-    // Make a GET request to the specified URL
     const response = await axios.get(url);
-
-    // Extract the response content
-    const content = response.data;
-
-    // Write the content to the specified file path
-    await fs.writeFile(filePath, content, 'utf-8');
-
-    console.log(`Content successfully written to ${filePath} for ${url}`);
+    return response.data;
   } catch (error) {
-    console.error(`Error: ${error.message}`);
+    return `Error: ${error.message}`;
   }
 }
 
-// Get command-line arguments
+async function storeContent(url, filePath) {
+  const content = await processURL(url);
+
+  try {
+    await fs.writeFile(filePath, content, 'utf-8');
+    console.log(`Content successfully written to ${filePath} for ${url}`);
+  } catch (error) {
+    console.error(`Error writing to ${filePath}: ${error.message}`);
+  }
+}
+
+// Check if command-line arguments are provided
+if (process.argv.length !== 4) {
+  console.error('Usage: node 3-request_store.js <URL> <FilePath>');
+  process.exit(1);
+}
+
 const url = process.argv[2];
 const filePath = process.argv[3];
 
-// Check if both URL and file path are provided
-if (url && filePath) {
-  // Call the processURL function with the provided URL and file path
-  processURL(url, filePath);
-} else {
-  // Display usage information if arguments are missing
-  console.error('Usage: node 3-request_store.js <URL> <FilePath>');
-}
+storeContent(url, filePath);
