@@ -7,7 +7,7 @@ async function processURL(url) {
     return response.data;
   } catch (error) {
     console.error(`Error fetching content from ${url}: ${error.message}`);
-    return '';
+    return ''; // Return an empty string in case of an error
   }
 }
 
