@@ -16,8 +16,8 @@ const urls = [
 
 const processURL = async (url) => {
   try {
-    const response = await axios.get(url, { responseType: 'text' });
-    fs.appendFileSync(filePath, response.data + '\n', 'utf-8');
+    const response = await axios.get(url);
+    fs.appendFileSync(filePath, response.data, 'utf-8');
     console.log(`Content successfully written to ${filePath} for ${url}`);
   } catch (error) {
     console.error(`Error making the request for ${url}:`, error.message);
@@ -25,6 +25,9 @@ const processURL = async (url) => {
 };
 
 // Process each URL
-urls.forEach((url) => {
-  processURL(url);
-});
+for (const url of urls) {
+  await processURL(url);
+}
+
+// Add a newline at the end of the file
+fs.appendFileSync(filePath, '\n', 'utf-8');
