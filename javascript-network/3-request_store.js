@@ -16,9 +16,9 @@ function fetchAndCategorize(url) {
     // Categorize based on the size of the response body
     const size = body.length;
     if (size > 1000) {
-      console.log(`Correct output - big text - ${url}`);
-    } else if (size > 0) {
       console.log(`Correct output - small text - ${url}`);
+    } else if (size > 0) {
+      console.log(`Correct output - big text - ${url}`);
     } else {
       console.log(`Correct output - empty text - ${url}`);
     }
