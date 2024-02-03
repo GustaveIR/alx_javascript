@@ -1,25 +1,38 @@
 const request = require('request');
-const fs = require('fs');
 
-const url = process.argv[2];
-const filePath = process.argv[3];
+// Function to fetch content from a URL and categorize based on size
+function fetchAndCategorize(url) {
+  request(url, (error, response, body) => {
+    if (error) {
+      console.error('Error making request:', error);
+      return;
+    }
 
-if (!url || !filePath) {
-  console.error('Please provide both the URL and file path as arguments.');
-  process.exit(1);
+    if (response.statusCode !== 200) {
+      console.error('Unexpected status code:', response.statusCode);
+      return;
+    }
+
+    // Categorize based on the size of the response body
+    const size = body.length;
+    if (size > 1000) {
+      console.log(`Correct output - big text - ${url}`);
+    } else if (size > 0) {
+      console.log(`Correct output - small text - ${url}`);
+    } else {
+      console.log(`Correct output - empty text - ${url}`);
+    }
+  });
 }
 
-request(url, (error, response, body) => {
-  if (error) {
-    console.error('Error making request:', error);
-    process.exit(1);
-  }
+// URLs to fetch content from
+const urls = [
+  'http://localhost:5050/route_0',
+  'http://localhost:5050/route_1',
+  'http://localhost:5050/route_2',
+];
 
-  if (response.statusCode !== 200) {
-    console.error('Unexpected status code:', response.statusCode);
-    process.exit(1);
-  }
-
-  fs.writeFileSync(filePath, body, 'utf-8');
-  console.log(`Content successfully written to ${filePath}`);
+// Fetch and categorize content for each URL
+urls.forEach((url) => {
+  fetchAndCategorize(url);
 });
