@@ -1,3 +1,5 @@
+// 3-request_store.js
+
 const request = require('request');
 
 // Function to fetch content from a URL and categorize based on size
@@ -33,4 +35,4 @@ const urls = [
 ];
 
 // Export the fetchAndCategorize function and the urls array
-export default { fetchAndCategorize, urls };
+module.exports = { fetchAndCategorize, urls };
