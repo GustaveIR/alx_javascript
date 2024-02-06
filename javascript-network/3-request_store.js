@@ -17,7 +17,7 @@ function fetchAndCategorize(url, expectedContent) {
     // Categorize based on the size of the response body
     const size = body.length;
     console.log(`Correct output - ${size > 1000 ? 'big' : 'small'} text - ${url}`);
-
+    
     // Write content to a file
     const fileName = `file_${urls.indexOf(url)}`;
     fs.writeFile(fileName, body, 'utf-8', (writeError) => {
