@@ -1,5 +1,3 @@
-// 3-request_store.js
-
 const request = require('request');
 
 // Function to fetch content from a URL and categorize based on size
