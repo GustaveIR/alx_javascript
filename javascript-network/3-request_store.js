@@ -32,7 +32,5 @@ const urls = [
   'http://localhost:5050/route_2',
 ];
 
-// Fetch and categorize content for each URL
-urls.forEach((url) => {
-  fetchAndCategorize(url);
-});
+// Export the fetchAndCategorize function and the urls array
+export default { fetchAndCategorize, urls };
