@@ -34,9 +34,13 @@ function fetchAndCategorize(url, expectedContent) {
           return;
         }
         console.log(`(Length: ${fileContent.length} chars long)`);
-        console.log(`[Expected]`);
-        console.log(expectedContent);
-        console.log(`(Length: ${expectedContent.length} chars long)`);
+
+        // Print expected content only if it is provided
+        if (expectedContent !== undefined) {
+          console.log(`[Expected]`);
+          console.log(expectedContent);
+          console.log(`(Length: ${expectedContent.length} chars long)`);
+        }
       });
     });
   });
