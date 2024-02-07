@@ -2,7 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 
 // Function to fetch content from a URL and categorize based on size
-async function fetchAndCategorize(url, expectedContent) {
+async function fetchAndCategorize(url, expectedContent, urls) {
   try {
     const response = await axios.get(url);
 
@@ -51,5 +51,5 @@ const expectedContents = [
 
 // Fetch and categorize content for each URL
 urls.forEach((url, index) => {
-  fetchAndCategorize(url, expectedContents[index]);
+  fetchAndCategorize(url, expectedContents[index], urls);
 });
