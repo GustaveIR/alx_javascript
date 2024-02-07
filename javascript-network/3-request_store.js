@@ -1,49 +1,38 @@
-const request = require('request');
+const axios = require('axios');
 const fs = require('fs');
 
 // Function to fetch content from a URL and categorize based on size
-function fetchAndCategorize(url, expectedContent) {
-  request(url, (error, response, body) => {
-    if (error) {
-      console.error('Error making request:', error);
-      return;
-    }
+async function fetchAndCategorize(url, expectedContent) {
+  try {
+    const response = await axios.get(url);
 
-    if (response.statusCode !== 200) {
-      console.error('Unexpected status code:', response.statusCode);
+    if (response.status !== 200) {
+      console.error('Unexpected status code:', response.status);
       return;
     }
 
     // Categorize based on the size of the response body
-    const size = body.length;
+    const size = response.data.length;
     console.log(`Correct output - ${size > 1000 ? 'big' : 'small'} text - ${url}`);
-    
-    // Write content to a file
-    const fileName = `file_${urls.indexOf(url)}`;
-    fs.writeFile(fileName, body, 'utf-8', (writeError) => {
-      if (writeError) {
-        console.error('Error writing to file:', writeError);
-        return;
-      }
-      console.log(` - [Got]`);
-      
-      // Simulate cat command
-      fs.readFile(fileName, 'utf-8', (readError, fileContent) => {
-        if (readError) {
-          console.error(`[stderr]: cat: ${fileName}: ${readError.code === 'ENOENT' ? 'No such file or directory' : readError.message}`);
-          return;
-        }
-        console.log(`(Length: ${fileContent.length} chars long)`);
 
-        // Print expected content only if it is provided
-        if (expectedContent !== undefined) {
-          console.log(`[Expected]`);
-          console.log(expectedContent);
-          console.log(`(Length: ${expectedContent.length} chars long)`);
-        }
-      });
-    });
-  });
+    // Write content to a file
+    const fileName = `file_${urls.indexOf(url)}.txt`;
+    fs.writeFileSync(fileName, response.data, 'utf-8');
+    console.log(` - [Got]`);
+
+    // Simulate cat command
+    const fileContent = fs.readFileSync(fileName, 'utf-8');
+    console.log(`(Length: ${fileContent.length} chars long)`);
+
+    // Print expected content only if it is provided
+    if (expectedContent !== undefined) {
+      console.log(`[Expected]`);
+      console.log(expectedContent);
+      console.log(`(Length: ${expectedContent.length} chars long)`);
+    }
+  } catch (error) {
+    console.error('Error making request:', error.message);
+  }
 }
 
 // URLs to fetch content from
