@@ -49,7 +49,7 @@ const urls = [
 
 // Expected content for each URL
 const expectedContents = [
-  'C is fun!',  // Replace this with your actual expected content for the first URL
+  C is fun!,  // Replace this with your actual expected content for the first URL
   '', // Loripsum API response will be used here
   '', // Empty text
 ];
