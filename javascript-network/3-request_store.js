@@ -43,13 +43,13 @@ async function fetchAndCategorize(url, expectedContent, urls) {
 // URLs to fetch content from
 const urls = [
   'http://localhost:5050/route_0',
-  'http://loripsum.net/api',
+  'http://loripsum.net/api',  // Loripsum API URL
   'http://localhost:5050/route_2',
 ];
 
 // Expected content for each URL
 const expectedContents = [
-  'C is fun!',
+  'C is fun!',  // Replace this with your actual expected content for the first URL
   '', // Loripsum API response will be used here
   '', // Empty text
 ];
