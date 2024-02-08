@@ -40,22 +40,22 @@ async function fetchAndCategorize(url, expectedContent, urls) {
   }
 }
 
-// URLs to fetch content from
-const urls = [
-  'http://localhost:5050/route_0',
-  'http://loripsum.net/api',  // Loripsum API URL
-  'http://localhost:5050/route_2',
-];
-
-// Expected content for each URL
-const expectedContents = [
-  'C is fun!',  // Replace this with your actual expected content for the first URL
-  '', // Loripsum API response will be used here
-  '', // Empty text
-];
-
 // Async function to fetch data
 async function fetchData() {
+  // URLs to fetch content from
+  const urls = [
+    'http://localhost:5050/route_0',
+    'http://loripsum.net/api',  // Loripsum API URL
+    'http://localhost:5050/route_2',
+  ];
+
+  // Expected content for each URL
+  const expectedContents = [
+    'C is fun!',  // Replace this with your actual expected content for the first URL
+    '', // Loripsum API response will be used here
+    '', // Empty text
+  ];
+
   for (let index = 0; index < urls.length; index++) {
     // For the Loripsum API, make a separate request to get the expected content
     if (index === 1) {
