@@ -61,15 +61,18 @@ async function fetchData() {
     if (index === 1) {
       try {
         const loripsumResponse = await axios.get(urls[index]);
-        fileName = `file_${urls.indexOf(urls[index])}.txt`; // Update fileName here
+        const fileName = `file_${urls.indexOf(urls[index])}.txt`; // Update fileName here
         expectedContents[index] = loripsumResponse.data;
+
+        // Fetch and categorize content for the current URL
+        await fetchAndCategorize(urls[index], expectedContents[index], urls);
       } catch (error) {
         console.error('Error fetching Loripsum content:', error.message);
       }
+    } else {
+      // Fetch and categorize content for the current URL
+      await fetchAndCategorize(urls[index], expectedContents[index], urls);
     }
-
-    // Fetch and categorize content for the current URL
-    await fetchAndCategorize(urls[index], expectedContents[index], urls);
   }
 }
 
