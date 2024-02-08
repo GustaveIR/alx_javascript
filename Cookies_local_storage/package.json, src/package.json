@@ -1,0 +1,14 @@
+{
+    "name": "alx_javascript",
+    "version": "1.0.0",
+    "main": "src/index.js",
+    "scripts": {
+      "start": "webpack-dev-server --open"
+    },
+    "devDependencies": {
+      "webpack": "^5.0.0",
+      "webpack-cli": "^4.0.0",
+      "webpack-dev-server": "^4.0.0"
+    }
+  }
+  
