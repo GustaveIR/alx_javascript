@@ -16,9 +16,11 @@ async function fetchAndCategorize(url, expectedContent, urls) {
     console.log(`Correct output - ${size > 1000 ? 'big' : 'small'} text - ${url}`);
 
     // Write content to a file if it's not empty
-    const fileName = `file_${urls.indexOf(url)}.txt`;
+    let fileName = `file_${urls.indexOf(url)}.txt`;
 
-    if (response.data !== undefined && response.data !== '') {
+
+    if (response.data !== null && response.data !== undefined && response.data !== '') {
+
       fs.writeFileSync(fileName, response.data, 'utf-8');
       console.log(` - [Got]`);
 
@@ -54,13 +56,13 @@ const expectedContents = [
   '', // Empty text
 ];
 
-// Fetch and categorize content for each URL
-urls.forEach(async (url, index) => {
-  // For the Loripsum API, make a separate request to get the expected content
-  if (index === 1) {
-    const loripsumResponse = await axios.get(url);
-    expectedContents[index] = loripsumResponse.data;
-  }
+// For the Loripsum API, make a separate request to get the expected content
+if (index === 1) {
+  const loripsumResponse = await axios.get(url);
+  fileName = `file_${urls.indexOf(url)}.txt`; // Update fileName here
+  expectedContents[index] = loripsumResponse.data;
+}
+
 
   fetchAndCategorize(url, expectedContents[index], urls);
 });
