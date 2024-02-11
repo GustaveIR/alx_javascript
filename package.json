@@ -7,7 +7,10 @@
   "name": "alx_javascript",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
