@@ -1,71 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login to the Website</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Form</title>
+<style>
     body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
+        font-family: Arial, sans-serif;
     }
-    label {
-      display: block;
-      margin-bottom: 5px;
+    .login-container {
+        width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
     }
-    input[type="text"] {
-      width: 300px;
-      padding: 8px;
-      margin-bottom: 10px;
-      box-sizing: border-box;
+    .login-container h2 {
+        text-align: center;
     }
-    button {
-      font-weight: bold;
-      font-size: 18px;
-      padding: 10px;
-      margin-top: 10px;
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
     }
-  </style>
+    .login-container input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+    .login-container input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
 </head>
 <body>
-  <h2>Login to the Website</h2>
-  <form id="loginForm">
-    <label for="firstname">First Name:</label>
-    <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
 
-    <label for="email">Email:</label>
-    <input type="text" id="email" name="email" placeholder="Enter your email" required>
+<div class="login-container">
+    <h2>Login</h2>
+    <form action="#" method="post">
+        <input type="text" id="firstname" name="firstname" placeholder="First Name" required>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Login" onclick="setCookies()">
+        <button type="button" onclick="showCookies()">Show the cookies</button>
+    </form>
+</div>
 
-    <button type="button" onclick="setCookies()" title="Log me in">Log me in</button>
-  </form>
-  
-  <button type="button" onclick="showCookies()">Show the cookies</button>
-
-  <script>
+<script>
     function setCookies() {
-      var firstNameValue = document.getElementById('firstname').value;
-      var emailValue = document.getElementById('email').value;
-      
-      document.cookie = `firstname=${firstNameValue}; path=/`;
-      document.cookie = `email=${emailValue}; path=/`;
+        var firstnameValue = document.getElementById('firstname').value;
+        var emailValue = document.getElementById('email').value;
+        document.cookie = "firstname=" + firstnameValue;
+        document.cookie = "email=" + emailValue;
     }
 
     function showCookies() {
-      var cookies = document.cookie.split(';');
-      var cookiesText = "Cookies:";
-      for (var i = 0; i < cookies.length; i++) {
-        cookiesText += "<br>" + cookies[i].trim();
-      }
-
-      var paragraph = document.createElement('p');
-      paragraph.innerHTML = cookiesText;
-      document.body.appendChild(paragraph);
+        var cookiesParagraph = document.createElement('p');
+        cookiesParagraph.innerHTML = "Cookies: " + document.cookie;
+        document.body.appendChild(cookiesParagraph);
     }
-  </script>
+</script>
+
 </body>
 </html>
