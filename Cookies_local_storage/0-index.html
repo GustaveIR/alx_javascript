@@ -32,6 +32,7 @@
       font-weight: bold;
       font-size: 18px;
       padding: 10px;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -45,8 +46,31 @@
     <label for="email">Email:</label>
     <input type="text" id="email" name="email" placeholder="Enter your email" required>
 
-    <button type="submit" title="Log me in">Log in</button>
+    <button type="button" onclick="setCookies()" title="Log me in">Log in</button>
+    <button type="button" onclick="showCookies()">Show the cookies</button>
   </form>
+
+  <script>
+    function setCookies() {
+      var firstNameValue = document.getElementById('firstname').value;
+      var emailValue = document.getElementById('email').value;
+      
+      document.cookie = `firstname=${firstNameValue}`;
+      document.cookie = `email=${emailValue}`;
+    }
+
+    function showCookies() {
+      var cookies = document.cookie.split(';');
+      var cookiesText = "Cookies:";
+      for (var i = 0; i < cookies.length; i++) {
+        cookiesText += "<br>" + cookies[i].trim();
+      }
+
+      var paragraph = document.createElement('p');
+      paragraph.innerHTML = cookiesText;
+      document.body.appendChild(paragraph);
+    }
+  </script>
 </body>
 
 </html>
