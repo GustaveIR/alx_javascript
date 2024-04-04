@@ -23,7 +23,7 @@
     .login-container input[type="email"] {
         width: calc(50% - 5px);
         padding: 10px;
-        margin: 10px 0;
+        margin-right: 5px;
         border: 1px solid #ccc;
         border-radius: 3px;
         box-sizing: border-box;
@@ -56,12 +56,10 @@
         <div class="flex-container">
             <input type="text" id="firstname" name="firstname" placeholder="First Name" required>
             <input type="email" id="email" name="email" placeholder="Email" required>
-        </div>
-        <div class="flex-container">
             <input type="submit" value="Log me in" onclick="setCookies()">
-            <h2>Cookies</h2>
-            <button type="button" onclick="showCookies()">Show Cookies</button>
         </div>
+        <h2>Cookies</h2>
+        <button type="button" onclick="showCookies()">Show Cookies</button>
     </form>
 </div>
 
