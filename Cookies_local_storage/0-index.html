@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,19 +14,16 @@
       height: 100vh;
       margin: 0;
     }
-
     label {
       display: block;
       margin-bottom: 5px;
     }
-
     input[type="text"] {
       width: 300px;
       padding: 8px;
       margin-bottom: 10px;
       box-sizing: border-box;
     }
-
     button {
       font-weight: bold;
       font-size: 18px;
@@ -36,7 +32,6 @@
     }
   </style>
 </head>
-
 <body>
   <h2>Login to the Website</h2>
   <form id="loginForm">
@@ -56,8 +51,8 @@
       var firstNameValue = document.getElementById('firstname').value;
       var emailValue = document.getElementById('email').value;
       
-      document.cookie = `firstname=${firstNameValue}`;
-      document.cookie = `email=${emailValue}`;
+      document.cookie = `firstname=${firstNameValue}; path=/`;
+      document.cookie = `email=${emailValue}; path=/`;
     }
 
     function showCookies() {
@@ -73,5 +68,4 @@
     }
   </script>
 </body>
-
 </html>
