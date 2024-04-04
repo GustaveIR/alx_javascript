@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Form</title>
+<!-- Add js-cookie library using jsdelivr CDN -->
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/src/js.cookie.min.js"></script>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .login-container {
+        width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+    .login-container h2 {
+        text-align: center;
+    }
+    .login-container input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+    .login-container button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+    .login-container button:hover {
+        background-color: #0056b3;
+    }
+    .welcome-message {
+        text-align: center;
+    }
+    .welcome-message a {
+        font-style: italic;
+        margin-left: 10px;
+        font-size: 10px;
+    }
+</style>
+</head>
+<body>
+
+<div class="welcome-message" id="welcomeMessage">
+    <!-- This div will be replaced by JavaScript with Welcome message -->
+</div>
+
+<div class="login-container" id="loginForm">
+    <h2>Login to the website</h2>
+    <input type="text" id="firstname" placeholder="First Name" required>
+    <input type="text" id="email" placeholder="Email" required>
+    <button onclick="setCookiesAndShowWelcomeMessage()">Log me in</button>
+</div>
+
+<script>
+    function setCookiesAndShowWelcomeMessage() {
+        var firstnameValue = document.getElementById('firstname').value;
+        var emailValue = document.getElementById('email').value;
+
+        // Set expiration date 10 days from now
+        var expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + 10);
+
+        // Set cookies with specific expiration date
+        Cookies.set("firstname", firstnameValue, { expires: expirationDate });
+        Cookies.set("email", emailValue, { expires: expirationDate });
+
+        showWelcomeMessageOrForm();
+    }
+
+    function deleteCookiesAndShowForm() {
+        Cookies.remove("firstname");
+        Cookies.remove("email");
+        showForm();
+    }
+
+    function showForm() {
+        var welcomeMessage = document.getElementById('welcomeMessage');
+        if (welcomeMessage) {
+            welcomeMessage.remove(); // Remove welcome message if it exists
+        }
+        document.getElementById('loginForm').style.display = "block"; // Show login form
+    }
+
+    function showWelcomeMessageOrForm() {
+        var firstname = Cookies.get("firstname");
+        if (firstname) {
+            var welcomeMessage = document.createElement('h1');
+            welcomeMessage.textContent = "Welcome " + firstname;
+            var logoutLink = document.createElement('a');
+            logoutLink.textContent = "(logout)";
+            logoutLink.href = "#";
+            logoutLink.style.fontWeight = "normal";
+            logoutLink.style.fontStyle = "italic";
+            logoutLink.style.marginLeft = "10px";
+            logoutLink.style.fontSize = "10px";
+            logoutLink.onclick = function() {
+                deleteCookiesAndShowForm();
+            };
+            welcomeMessage.appendChild(logoutLink);
+            document.body.innerHTML = ''; // Remove existing content
+            document.body.appendChild(welcomeMessage);
+        } else {
+            showForm();
+        }
+    }
+
+    showWelcomeMessageOrForm(); // Call on page load to determine whether to show welcome message or login form
+</script>
+
+</body>
+</html>
