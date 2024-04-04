@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping Cart</title>
+</head>
+<body>
+
+<script>
+    // Check if local storage is supported
+    if (typeof(Storage) !== "undefined") {
+        // Local storage is supported
+        // Initialize availableItems array
+        var availableItems = ["Shampoo", "Soap", "Sponge", "Water"];
+
+        // Function to add item to cart
+        function addItemToCart(item) {
+            localStorage.setItem(item, true); // Set item in local storage
+            displayCart(); // Update cart display
+        }
+
+        // Function to create store
+        function createStore() {
+            var ul = document.createElement('ul'); // Create ul element
+            // Loop through availableItems array
+            availableItems.forEach(function(item) {
+                var li = document.createElement('li'); // Create li element
+                li.textContent = item; // Set text content of li to item name
+                li.addEventListener('click', function() {
+                    addItemToCart(item); // Add click event listener to add item to cart
+                });
+                ul.appendChild(li); // Append li to ul
+            });
+            document.body.appendChild(ul); // Append ul to body
+        }
+
+        // Function to display cart
+        function displayCart() {
+            var count = 0;
+            for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                if (localStorage.getItem(key) === "true") {
+                    count++;
+                }
+            }
+            if (count > 0) {
+                var message = document.createElement('p'); // Create p element
+                message.textContent = "You previously had " + count + " items in your cart"; // Set text content
+                document.body.appendChild(message); // Append p to body
+            }
+        }
+
+        // Call functions to initialize the application
+        createStore();
+        displayCart();
+    } else {
+        // Local storage is not supported
+        alert("Sorry, your browser does not support Web storage. Try again with a better one");
+    }
+</script>
+
+</body>
+</html>
