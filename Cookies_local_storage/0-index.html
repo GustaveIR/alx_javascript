@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cookie Demo</title>
+  <title>Login to the Website</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -21,7 +21,7 @@
       margin-bottom: 5px;
     }
 
-    input {
+    input[type="text"] {
       width: 300px;
       padding: 8px;
       margin-bottom: 10px;
@@ -37,15 +37,16 @@
 </head>
 
 <body>
-  <label for="firstname">First Name:</label>
-  <input type="text" id="firstname">
+  <h2>Login to the Website</h2>
+  <form id="loginForm">
+    <label for="firstname">First Name:</label>
+    <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
 
-  <label for="email">Email:</label>
-  <input type="text" id="email">
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" placeholder="Enter your email" required>
 
-  <button onclick="setCookies()" title="Log me in">Log me in</button>
-  <button onclick="showCookies()">Show the cookies</button>
-  <script src="bundle.js"></script>
+    <button type="submit" title="Log me in">Log in</button>
+  </form>
 </body>
 
 </html>
